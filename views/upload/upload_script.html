@@ -1,0 +1,25 @@
+
+<script type="text/javascript">     
+    $("#file_upload").uploadify({        
+        'fileObjName':'image',                
+        'debug':false,                  
+        'auto':false,               
+	    'buttonText':'选择图片',                   
+	    'removeCompleted':true,                    
+	    'cancelImg':'/static/js/uploadify/uploadify-cancel.png',                   
+	    'swf':'/static/js/uploadify/uploadify.swf',              
+	    'uploader':'/upload',             
+	    'fileTypeDesc':'FileType',                  
+	    'fileTypeExts':'*.jpg;*.jpge;*.gif;*.png',                  
+	    'overrideEvents':['onDialogClose'],
+	     'multi':true,              
+		'onQueueComplete' : function(queueData) {
+			if (queueData.uploadsSuccessful ==0) {
+				alert(' 上传失败');
+			}else{
+				alert(queueData.uploadsSuccessful + ' 个文件上传成功.');
+			};
+            
+        }      
+     });         	
+</script>
