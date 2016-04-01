@@ -11,18 +11,18 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-type LoginController struct {
+type AuthController struct {
 	BaseController
 }
 
 var sessionName = beego.AppConfig.String("SessionName")
 
-func (this *LoginController) LoginView() {
+func (this *AuthController) LoginView() {
 	beego.ReadFromRequest(&this.Controller)
 	this.TplName = "login/login.html"
 }
 
-func (this *LoginController) Login() {
+func (this *AuthController) Login() {
 	flash := beego.NewFlash()
 	errMsg := ""
 	var user models.Users
@@ -51,6 +51,11 @@ func (this *LoginController) Login() {
 	flash.Store(&this.Controller)
 	this.Redirect("/login", 302)
 	//this.ServeJSON()
+}
+
+func (this *AuthController) Logout() {
+	this.SetSession(sessionName, "")
+	this.Redirect("/login", 302)
 }
 
 var AuthRequest = func(ctx *context.Context) {
