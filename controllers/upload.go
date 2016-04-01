@@ -25,6 +25,7 @@ func (this *UploadController) UploadView() {
 
 func (this *UploadController) Upload() {
 	f, h, _ := this.GetFile("image")
+	//fmt.Println(strings.Split(h.Filename, ".")[1])
 	path := this.Ctx.Request.URL.EscapedPath()
 	date_str := time.Now().Format("20060102")
 	path = "./static/img" + path + "/" + date_str
@@ -37,6 +38,7 @@ func (this *UploadController) Upload() {
 		panic(err)
 		return
 	}
+	//写入数据库
 	o := orm.NewOrm()
 	image := new(models.Temp)
 	image.Path = path + "/" + h.Filename

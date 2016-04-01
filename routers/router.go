@@ -11,4 +11,9 @@ func init() {
 	beego.Router("/login", &controllers.LoginController{}, "GET:LoginView;POST:Login")
 	beego.Router("/upload", &controllers.UploadController{}, "GET:UploadView;POST:Upload")
 	beego.Router("/admin", &controllers.UploadController{}, "GET:IndexView")
+
+	//filters
+	beego.InsertFilter("/", beego.BeforeRouter, controllers.AuthRequest)
+	beego.InsertFilter("/upload", beego.BeforeRouter, controllers.AuthRequest)
+	beego.InsertFilter("/admin", beego.BeforeRouter, controllers.AuthRequest)
 }

@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"move_kakou_platform/models"
 	"strings"
 
 	"github.com/astaxie/beego"
@@ -10,6 +11,7 @@ type BaseController struct {
 	beego.Controller
 	controllerName string
 	actionName     string
+	user           *models.Users
 }
 
 func (base *BaseController) Prepare() {
